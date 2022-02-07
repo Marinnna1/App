@@ -1,0 +1,1 @@
+create table j(id int primary key);
