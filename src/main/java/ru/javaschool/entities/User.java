@@ -61,8 +61,8 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Position getPosition() {
-        return position;
+    public String getPosition() {
+        return position.toString();
     }
 
     public void setPosition(Position position) {

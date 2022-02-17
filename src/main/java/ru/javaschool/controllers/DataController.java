@@ -21,4 +21,9 @@ public class DataController {
     public List<Data> getData() {
         return dataService.getAllData();
     }
+
+    @GetMapping("test")
+    public String getTestData() {
+        return "test";
+    }
 }

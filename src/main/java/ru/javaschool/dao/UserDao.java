@@ -1,6 +1,7 @@
 package ru.javaschool.dao;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import ru.javaschool.entities.User;
 import ru.javaschool.enums.Position;
@@ -22,7 +23,7 @@ public class UserDao {
             Transaction tx1 = session.beginTransaction();
             session.save(new User(name, password, position));
             tx1.commit();
-            log.info("save new user in database");
+            log.info("save new user " + name + " in database");
             return true;
         }
         catch (Exception e) {
@@ -34,15 +35,28 @@ public class UserDao {
 
 
 
-    public boolean find(String name, String password) {
-        List<User> users = (List<User>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User as user where user.name =\'" + name + "\'" + " and password = \'" + password + "\'").list();
-        return !users.isEmpty();
+    public boolean find(String name, String password, PasswordEncoder passwordEncoder) {
+        try {
+            List<User> users = (List<User>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User as user where user.name =\'" + name + "\'").list();
+            if (!users.isEmpty()) {
+                if (passwordEncoder.matches(password, users.get(0).getPassword())) {
+                    log.info("user " + users.get(0).getName() + " - incorrect password");
+                    return true;
+                }
+            }
+            log.info("can't find user");
+            return false;
+        }
+        catch (Exception e) {
+            return false;
+        }
+
     }
 
     public Position getUserPosition(String name, String password) {
-        User currentUser = (User) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User as user where user.name =\'" + name + "\'" + " and user.password = \'" + password + "\'").list().get(0);
-        log.info("get position for current user from table \"users\"");
-        return currentUser.getPosition();
+        User currentUser = (User) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User as user where user.name =\'" + name + "\'").list().get(0);
+        log.info("get position for user " + currentUser.getName() + " from table \"users\"");
+        return Position.valueOf(currentUser.getPosition());
     }
 
     public User findByUserName(String name) {

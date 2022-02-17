@@ -11,8 +11,7 @@ import java.util.List;
 public class DataDao {
 
     public List<Data> findAll() {
-        //List<Data> data = (List<Data>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Data").list();
-        return null;
-       // return data;
+        List<Data> data = (List<Data>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Data").list();
+        return data;
     }
 }
