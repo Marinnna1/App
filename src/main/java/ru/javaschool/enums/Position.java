@@ -1,6 +1,13 @@
 package ru.javaschool.enums;
 
-public enum Position {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Position implements GrantedAuthority {
     DOCTOR,
     NURSE;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

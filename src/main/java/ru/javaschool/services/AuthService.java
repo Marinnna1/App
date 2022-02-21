@@ -18,7 +18,7 @@ import java.util.Objects;
 
 
 @Service
-public class AuthService implements UserDetailsService {
+public class AuthService {
 
     private static Logger log = Logger.getLogger(AuthService.class.getName());
 
@@ -64,9 +64,4 @@ public class AuthService implements UserDetailsService {
     }
 
 
-    @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        User u = userDao.findByUserName(name);
-        return new org.springframework.security.core.userdetails.User(u.getName(), u.getPassword(), true, true, true, true, new HashSet<>());
-    }
 }
