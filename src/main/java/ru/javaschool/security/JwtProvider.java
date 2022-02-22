@@ -12,7 +12,7 @@ import java.util.logging.*;
 @Component
 public class JwtProvider {
 
-    @Value("TopSecretValue")
+    @Value("SecretValue")
     private String jwtSecret;
 
     @Value("3600000")
