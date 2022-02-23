@@ -26,7 +26,7 @@ public class AppointmentsDao {
             List<Appointment> appointments = (List<Appointment>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Appointment").list();
             return appointments;
         }
-        catch (NullPointerException e) {
+        catch (Exception e) {
             return null;
         }
     }
@@ -45,6 +45,16 @@ public class AppointmentsDao {
         session.save(appointment);
         session.getTransaction().commit();
 
+    }
+
+
+    public void deleteAppointment(Integer appointmentNumber) {
+        Appointment appointment = ((List<Appointment>) HibernateSessionFactoryUtil.getSessionFactory()
+                .openSession().createQuery("From Appointment").list()).get(appointmentNumber);
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(appointment);
+        session.getTransaction().commit();
     }
 
 

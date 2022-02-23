@@ -27,4 +27,11 @@ public class AppointmentsController {
     public void addAppointment(@RequestBody AppointmentDto appointmentDto) {
         appointmentsService.addAppointment(appointmentDto);
     }
+
+
+    @PostMapping("delete")
+    public void deleteAppointment(@RequestBody AppointmentDto appointmentDto) {
+        System.out.println("delete " + appointmentDto.getId());
+        appointmentsService.deleteAppointment(appointmentDto.getId());
+    }
 }

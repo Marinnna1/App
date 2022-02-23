@@ -28,4 +28,15 @@ public class PatientsService {
         }
         return patientDtos;
     }
+
+
+    public void addPatient(PatientDto patientDto) {
+        patientsDao.addPatient(patientDto.getName(), patientDto.getDiagnosis(), patientDto.getInsurance(),
+                patientDto.getStatus(), patientDto.getDoctorName());
+    }
+
+
+    public void deletePatient(PatientDto patientDto) {
+        patientsDao.deletePatient(patientDto.getName());
+    }
 }

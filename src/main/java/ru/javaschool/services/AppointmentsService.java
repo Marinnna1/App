@@ -8,6 +8,7 @@ import ru.javaschool.dao.AppointmentsDao;
 import ru.javaschool.dto.AppointmentDto;
 import ru.javaschool.entities.Appointment;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,5 +39,9 @@ public class AppointmentsService {
     public void addAppointment(AppointmentDto appointmentDto) {
         appointmentsDao.addAppointment(appointmentDto.getPatientName(), appointmentDto.getDose(),
                 appointmentDto.getPeriod(), appointmentDto.getTimePattern(), appointmentDto.getTreatmentName());
+    }
+
+    public void deleteAppointment(Integer appointmentNumber) {
+        appointmentsDao.deleteAppointment(appointmentNumber);
     }
 }

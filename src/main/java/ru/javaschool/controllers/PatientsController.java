@@ -2,10 +2,7 @@ package ru.javaschool.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.javaschool.dto.EventDto;
 import ru.javaschool.dto.PatientDto;
 import ru.javaschool.services.EventsService;
@@ -24,6 +21,19 @@ public class PatientsController {
     @GetMapping("all")
     public List<PatientDto> getData() {
         return patientsService.getAll();
+    }
+
+
+    @PostMapping("add")
+    public void addPatient(@RequestBody PatientDto patientDto) {
+        patientsService.addPatient(patientDto);
+    }
+
+
+    @PostMapping("delete")
+    public void deletePatient(@RequestBody PatientDto patientDto) {
+        System.out.println("delete patient");
+        patientsService.deletePatient(patientDto);
     }
 
 }
