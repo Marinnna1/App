@@ -2,10 +2,7 @@ package ru.javaschool.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.javaschool.dto.AppointmentDto;
 import ru.javaschool.entities.Appointment;
 import ru.javaschool.entities.Data;
@@ -24,5 +21,10 @@ public class AppointmentsController {
     @GetMapping("all")
     public List<AppointmentDto> getData() {
         return appointmentsService.getAll();
+    }
+
+    @PostMapping("add")
+    public void addAppointment(@RequestBody AppointmentDto appointmentDto) {
+        appointmentsService.addAppointment(appointmentDto);
     }
 }

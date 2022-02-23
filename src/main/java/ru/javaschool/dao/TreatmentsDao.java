@@ -20,4 +20,11 @@ public class TreatmentsDao {
             return null;
         }
     }
+
+
+    public Treatment findTreatmentByName(String name) {
+        Treatment treatment = ((List<Treatment>) HibernateSessionFactoryUtil.getSessionFactory().openSession()
+                .createQuery("From Treatment where name = \'" + name + "\'").list()).get(0);
+        return treatment;
+    }
 }

@@ -33,4 +33,10 @@ public class AppointmentsService {
         }
         return appointmentDtos;
     }
+
+
+    public void addAppointment(AppointmentDto appointmentDto) {
+        appointmentsDao.addAppointment(appointmentDto.getPatientName(), appointmentDto.getDose(),
+                appointmentDto.getPeriod(), appointmentDto.getTimePattern(), appointmentDto.getTreatmentName());
+    }
 }

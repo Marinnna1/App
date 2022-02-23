@@ -20,4 +20,10 @@ public class PatientsDao {
         }
     }
 
+    public Patient findPatientByName(String name) {
+        Patient patient = ((List<Patient>) HibernateSessionFactoryUtil.getSessionFactory().openSession()
+                .createQuery("From Patient where name = \'" + name + "\'").list()).get(0);
+        return patient;
+    }
+
 }

@@ -5,12 +5,22 @@ public class AppointmentDto {
     private int id;
     private String patientName;
     private String treatmentType;
+    private String treatmentName;
     private String timePattern;
     private String period;
     private double dose;
 
     public int getId() {
         return id;
+    }
+
+
+    public String getTreatmentName() {
+        return treatmentName;
+    }
+
+    public void setTreatmentName(String treatmentName) {
+        this.treatmentName = treatmentName;
     }
 
     public void setId(int id) {
