@@ -2,10 +2,7 @@ package ru.javaschool.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.javaschool.dto.EventDto;
 import ru.javaschool.services.EventsService;
 
@@ -19,9 +16,20 @@ public class EventsController {
     @Autowired
     private EventsService eventsService;
 
-    @GetMapping("all")
-    public List<EventDto> getData() {
-        return eventsService.getAll();
+    @PostMapping("all")
+    public List<EventDto> getData(@RequestBody EventDto eventDto) {
+        return eventsService.getAll(eventDto.getPageNumber(), eventDto.getStatus());
+    }
+
+    @PostMapping("events_count")
+    public Long getEventsCount(@RequestBody EventDto eventDto) {
+
+        return eventsService.getEventsCount(eventDto);
+    }
+
+    @PostMapping("edit_status")
+    public EventDto editStatus(@RequestBody EventDto eventDto) {
+        return eventsService.editStatus(eventDto);
     }
 
 }

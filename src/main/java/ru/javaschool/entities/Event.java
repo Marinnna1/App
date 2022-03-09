@@ -14,6 +14,10 @@ public class Event {
     @Column(name = "date")
     private String date;
 
+    @Column(name = "reason")
+    private String reason;
+
+
     @Column(name = "status")
     private String status;
 
@@ -23,15 +27,24 @@ public class Event {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
+    @JoinColumn(name = "appointment_id")
+    private Appointment appointment;
 
-    public Patient getPatient() {
-        return patient;
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     public int getId() {

@@ -2,6 +2,9 @@ package ru.javaschool.entities;
 
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "appointments")
@@ -22,17 +25,40 @@ public class Appointment {
     private String timePattern;
 
     @Column(name = "dose")
-    private double dose;
+    private Double dose;
 
-    @Column(name = "period")
-    private String period;
+    @Column(name = "start_date")
+    private Date startDate;
 
-    public String getPeriod() {
-        return period;
+    @Column(name = "end_date")
+    private Date endDate;
+
+
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Event> events = new HashSet<>();
+
+    public Set<Event> getEvents() {
+        return events;
     }
 
-    public void setPeriod(String period) {
-        this.period = period;
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public int getId() {
@@ -67,11 +93,11 @@ public class Appointment {
         this.timePattern = timePattern;
     }
 
-    public double getDose() {
+    public Double getDose() {
         return dose;
     }
 
-    public void setDose(double dose) {
+    public void setDose(Double dose) {
         this.dose = dose;
     }
 }

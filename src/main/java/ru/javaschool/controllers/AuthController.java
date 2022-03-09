@@ -17,7 +17,6 @@ import ru.javaschool.services.AuthService;
 @RequestMapping("auth/")
 public class AuthController {
 
-    private static Logger log = Logger.getLogger(AuthController.class.getName());
 
     @Autowired
     private AuthService authService;
@@ -29,14 +28,12 @@ public class AuthController {
     @PostMapping("signin")
     public String doSignIn(@RequestBody UserDto userDto) {
         String token = jwtProvider.generateToken(userDto.getName());
-        log.info("post request for sign in received");
         return authService.findUserPosition(userDto.getName(), userDto.getPassword());
     }
 
 
     @PostMapping("signup")
     public String doSignUp(@RequestBody UserDto userDto) {
-        log.info("post request for sign in received");
         return authService.saveUser(userDto.getName(), userDto.getPassword(), Position.valueOf(userDto.getPosition()));
     }
 

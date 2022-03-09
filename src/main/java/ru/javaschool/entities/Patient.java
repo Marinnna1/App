@@ -30,12 +30,25 @@ public class Patient {
     private String status;
 
 
-   // @Column(name = "doctor_id")
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Appointment> appointments = new HashSet<>();
+
+
    @ManyToMany(fetch = FetchType.EAGER)
    @JoinTable(name = "patient_doctor",
            joinColumns = @JoinColumn(name = "patient_id"),
            inverseJoinColumns = @JoinColumn(name = "doctor_id"))
     private List<Doctor> doctors = new ArrayList<>();
+
+
+
+    public Set<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(Set<Appointment> appointments) {
+        this.appointments = appointments;
+    }
 
     public int getId() {
         return id;

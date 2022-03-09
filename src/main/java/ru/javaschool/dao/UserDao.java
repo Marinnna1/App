@@ -23,7 +23,6 @@ public class UserDao {
             Transaction tx1 = session.beginTransaction();
             session.save(new User(name, password, position));
             tx1.commit();
-            log.info("save new user " + name + " in database");
             return true;
         }
         catch (Exception e) {
@@ -39,12 +38,8 @@ public class UserDao {
         try {
             List<User> users = (List<User>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User as user where user.name =\'" + name + "\'").list();
             if (!users.isEmpty()) {
-                if (passwordEncoder.matches(password, users.get(0).getPassword())) {
-                    log.info("user " + users.get(0).getName() + " - incorrect password");
-                    return true;
-                }
+                return passwordEncoder.matches(password, users.get(0).getPassword());
             }
-            log.info("can't find user");
             return false;
         }
         catch (Exception e) {
@@ -55,7 +50,6 @@ public class UserDao {
 
     public Position getUserPosition(String name, String password) {
         User currentUser = (User) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User as user where user.name =\'" + name + "\'").list().get(0);
-        log.info("get position for user " + currentUser.getName() + " from table \"users\"");
         return Position.valueOf(currentUser.getPosition());
     }
 

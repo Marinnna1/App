@@ -17,7 +17,6 @@ public class HibernateSessionFactoryUtil {
             try {
                 Configuration configuration = new Configuration().configure();
                 configuration.addAnnotatedClass(User.class);
-                configuration.addAnnotatedClass(Data.class);
                 configuration.addAnnotatedClass(Appointment.class);
                 configuration.addAnnotatedClass(Doctor.class);
                 configuration.addAnnotatedClass(Event.class);

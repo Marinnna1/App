@@ -1,11 +1,8 @@
 package ru.javaschool.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.javaschool.dto.AppointmentDto;
-import ru.javaschool.entities.Appointment;
-import ru.javaschool.entities.Data;
 import ru.javaschool.services.AppointmentsService;
 
 import java.util.List;
@@ -18,20 +15,42 @@ public class AppointmentsController {
     @Autowired
     private AppointmentsService appointmentsService;
 
-    @GetMapping("all")
-    public List<AppointmentDto> getData() {
-        return appointmentsService.getAll();
+
+
+    @PostMapping("all")
+    public List<AppointmentDto> getData(@RequestBody AppointmentDto appointmentDto) {
+        System.out.println("wrote request");
+        return appointmentsService.getAll(appointmentDto.getPageNumber());
+    }
+
+    @GetMapping("appointments_count")
+    public Long getAppointmentsCount() {
+        return appointmentsService.getAppointmentsCount();
     }
 
     @PostMapping("add")
-    public void addAppointment(@RequestBody AppointmentDto appointmentDto) {
-        appointmentsService.addAppointment(appointmentDto);
+    public AppointmentDto addAppointment(@RequestBody AppointmentDto appointmentDto) {
+        return appointmentsService.addAppointment(appointmentDto);
     }
 
 
     @PostMapping("delete")
     public void deleteAppointment(@RequestBody AppointmentDto appointmentDto) {
-        System.out.println("delete " + appointmentDto.getId());
         appointmentsService.deleteAppointment(appointmentDto.getId());
+    }
+
+    @PostMapping("edit_time_pattern")
+    public AppointmentDto editTimePattern(@RequestBody AppointmentDto appointmentDto) {
+        return appointmentsService.editTimePattern(appointmentDto);
+    }
+
+    @PostMapping("edit_dose")
+    public AppointmentDto editDose(@RequestBody AppointmentDto appointmentDto) {
+        return appointmentsService.editDose(appointmentDto);
+    }
+
+    @PostMapping("edit_period")
+    public AppointmentDto editPeriod(@RequestBody AppointmentDto appointmentDto) {
+        return appointmentsService.editPeriod(appointmentDto);
     }
 }

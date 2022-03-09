@@ -20,7 +20,6 @@ import java.util.Objects;
 @Service
 public class AuthService {
 
-    private static Logger log = Logger.getLogger(AuthService.class.getName());
 
     private UserDao userDao;
 
@@ -40,10 +39,8 @@ public class AuthService {
 
     public String findUserPosition(String name, String password) {
         if (userDao.find(name, password, passwordEncoder)) {
-            log.info("found user by name and password");
             return userDao.getUserPosition(name, password).toString();
         }
-        log.info("not found user by name and password");
         return "wrong";
     }
 
@@ -56,10 +53,8 @@ public class AuthService {
 
     public String saveUser(String name, String password, Position position) {
         if(userDao.save(name, passwordEncoder.encode(password), position)) {
-            log.info("save new user successfully");
             return position.toString();
         }
-        log.info("don't save new user");
         return "wrong";
     }
 

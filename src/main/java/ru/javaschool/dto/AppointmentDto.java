@@ -1,14 +1,61 @@
 package ru.javaschool.dto;
 
+import java.util.Date;
+
 public class AppointmentDto {
 
     private int id;
+    private int pageNumber;
     private String patientName;
     private String treatmentType;
     private String treatmentName;
     private String timePattern;
     private String period;
-    private double dose;
+    private String dose;
+    private String message;
+    private Date startDate;
+    private Date endDate;
+
+
+    public AppointmentDto() {
+
+    }
+
+    public AppointmentDto(String message) {
+        this.message = message;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
 
     public int getId() {
         return id;
@@ -59,11 +106,11 @@ public class AppointmentDto {
         this.period = period;
     }
 
-    public double getDose() {
+    public String getDose() {
         return dose;
     }
 
-    public void setDose(double dose) {
+    public void setDose(String dose) {
         this.dose = dose;
     }
 }

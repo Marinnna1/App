@@ -8,7 +8,25 @@ public class PatientDto {
     private int insurance;
     private String status;
     private String doctorName;
+    private String message;
 
+
+    public PatientDto() {
+
+    }
+
+    public PatientDto(String message) {
+        this.message = message;
+    }
+
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public int getInsurance() {
         return insurance;

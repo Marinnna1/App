@@ -2,6 +2,7 @@ package ru.javaschool.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.javaschool.dto.EventDto;
 import ru.javaschool.dto.PatientDto;
@@ -25,15 +26,14 @@ public class PatientsController {
 
 
     @PostMapping("add")
-    public void addPatient(@RequestBody PatientDto patientDto) {
-        patientsService.addPatient(patientDto);
+    public PatientDto addPatient(@RequestBody PatientDto patientDto) {
+        return patientsService.addPatient(patientDto);
     }
 
 
     @PostMapping("delete")
-    public void deletePatient(@RequestBody PatientDto patientDto) {
-        System.out.println("delete patient");
-        patientsService.deletePatient(patientDto);
+    public PatientDto deletePatient(@RequestBody PatientDto patientDto) {
+        return patientsService.deletePatient(patientDto);
     }
 
 }
