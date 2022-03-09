@@ -36,7 +36,6 @@ public class AppointmentsService {
             currentAppointmentDto.setTreatmentName(appointments.get(i).getTreatment().getName());
             currentAppointmentDto.setTreatmentType(appointments.get(i).getTreatment().getType());
             currentAppointmentDto.setTimePattern(appointments.get(i).getTimePattern());
-            System.out.println("start " + appointments.get(i).getStartDate().toString());
             currentAppointmentDto.setStartDate(appointments.get(i).getStartDate());
             currentAppointmentDto.setEndDate(appointments.get(i).getEndDate());
             currentAppointmentDto.setDose(String.valueOf(appointments.get(i).getDose()));

@@ -19,7 +19,6 @@ public class AppointmentsController {
 
     @PostMapping("all")
     public List<AppointmentDto> getData(@RequestBody AppointmentDto appointmentDto) {
-        System.out.println("wrote request");
         return appointmentsService.getAll(appointmentDto.getPageNumber());
     }
 
